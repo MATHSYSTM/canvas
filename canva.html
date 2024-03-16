@@ -1,0 +1,56 @@
+
+
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> HOME   </title>
+<link rel="stylesheet" type="text/css" href="stylcanva.css">
+
+</head>
+<body> 
+<script>
+let ns="http://www.w3.org/2000/svg";
+window.onload=function(){
+var canvas=document.querySelector("#canv");
+var context=canvas.getContext('2d');
+var imag=new Image(); 
+imag.onload=function(){context.drawImage(imag,0,0,4000,1800,1,1,800,500);
+var imagedata=context.getImageData(0,0,canvas.width,canvas.height);
+
+var pix=imagedata.data;
+for(let i=0;i<500;i++){for(let j=0;j<800;j++){let r=parseInt((pix[4*j+800*i-1]/255)*100);
+let v=parseInt((pix[4*j+1+800*i-1]/255)*100);let b=parseInt((pix[4*j+2+800*i-1]/255)*100);
+let col="rgba("+r+"%,"+v+"%,"+b+"%,1)";
+let dr=document.createElementNS(ns,"line");
+dr.setAttribute("x1",""+j);dr.setAttribute("x2",""+(j+1));dr.setAttribute("y1",""+i);dr.setAttribute("y2",""+i);
+dr.setAttribute("stroke-width","1");dr.setAttribute("stroke",col);
+document.querySelector("#sv").append(dr);
+
+
+}
+
+}
+}
+imag.src='courimg1.jpg';
+ };
+
+
+ 
+
+</script>
+
+
+
+
+<div id="chap">
+
+<canvas id="canv" width="800" height="500"></canvas>
+
+<svg id="sv"></svg>
+
+</div>
+
+ 
+</body>
+</html> 
